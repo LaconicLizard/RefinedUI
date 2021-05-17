@@ -1,26 +1,35 @@
 package lacliz.refinedui;
 
 import com.google.gson.*;
+import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.client.options.KeyBinding;
+import net.minecraft.client.util.InputUtil;
+import org.lwjgl.glfw.GLFW;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
-import java.math.BigDecimal;
 import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.Map;
 
+import static lacliz.refinedui.RefinedUI.MOD_ID;
 import static lacliz.refinedui.Util.normalizeJsonElement;
 
 public class Config {
 
-    private static final Path CONFIG_FILE = FabricLoader.getInstance().getConfigDir().resolve(RefinedUI.MOD_ID + ".config.json");
+    private static final Path CONFIG_FILE = FabricLoader.getInstance().getConfigDir().resolve(MOD_ID + ".config.json");
     private static Config INSTANCE = null;
 
     public final boolean textFieldClear;
-    public final int textFieldClear_button;
+    public static final KeyBinding textFieldClear_keyBinding = KeyBindingHelper.registerKeyBinding(new KeyBinding(
+            "key." + MOD_ID + ".textFieldClearButton",
+            InputUtil.Type.MOUSE,
+            GLFW.GLFW_MOUSE_BUTTON_RIGHT,
+            "category." + MOD_ID + ".textFieldClearButton"
+    ));
 
     /**
      * Construct a Config object, reading from the given mapping from option name -> value.
@@ -33,9 +42,6 @@ public class Config {
      */
     private Config(Map<String, Object> config) {
         textFieldClear = (boolean) config.getOrDefault("textFieldClear", true);
-        textFieldClear_button = ((BigDecimal) config.getOrDefault("textFieldClear_button", BigDecimal.ONE)).intValueExact();
-        if (textFieldClear_button < 0 || textFieldClear_button >= 15) throw new IllegalArgumentException(
-                "textFieldClear_button value out of allowed range of [0,16): got " + textFieldClear_button);
     }
 
     public static Config get() {
@@ -86,7 +92,6 @@ public class Config {
         @Override public JsonElement serialize(Config src, Type typeOfSrc, JsonSerializationContext context) {
             JsonObject o = new JsonObject();
             o.addProperty("textFieldClear", src.textFieldClear);
-            o.addProperty("textFieldClear_button", src.textFieldClear_button);
             return o;
         }
 

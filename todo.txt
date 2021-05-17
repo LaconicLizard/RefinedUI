@@ -1,0 +1,43 @@
+
+
+Improvements / refinements:
+
+
+Features:
+- right-click on cycling buttons to go the other direction
+    - in particular, the graphics "fast / fancy / fabulous" button, to allow skipping "fabulous" if your pc can't handle it
+- keybind to use item in off hand even if main hand has an action
+    - likely implemented as swap-and-use-and-swap-back
+    - conflict between block-picking and use-offhand; which button to default to? 3?
+- above hotbar (and off-hand!) display total number of those items in inventory
+    - eg. if you have 1000 stone in inventory and a stack in hotbar, then display "1064" above that hotbar slot
+    - nothing above empty slots, including offhand
+- "inverse health bar" on entity models; a small red bar (visible from all angles; possibly multiple bars) that
+    increase in size as the entity gets damaged.  Bar should "fill" its space when the entity dies; this is to
+    unobtrusively indicate entity health.  (out of theme?)
+- entity info picking: in the vein of health bars, pick an entity (eg. with mmb) to display information about it in chat
+    (might be out of theme?)
+- show hunger saturation (is there a mod that already does this?  is this even client-side?)
+- show how much hunger/saturation the held food item will fill (is there a mod that already does this?
+    is this even client-side?)
+    - also display this in tooltips
+- armor: when holding in hand / hovering over an armor piece, indicate visually i) how much armor it provides, and
+    ii) what the difference is between that and the currently equipped armor
+- armor: when using an armor item (option: of equal or better quality) with an existing armor item equipped, swap
+    them out instead of doing nothing
+- clock item: show exact time (pop-up hud?), show real time
+    - with hud when held in main/off hand?
+
+Big Features: (likely out of theme)
+- macro creation?  (might be out of theme)
+    - perform commands / keypresses / inventory actions in sequence
+    - listen for input from chat / events in world
+    - loops and conditional control flow
+    - etc.
+- Add HUD elements (default off):
+    - Will want "hud picker" mode to move all these things around the hud
+    - clock (options: location on hud, present in each dimension, works in nether / end)
+    - normal compass (options: location on hud, present in each dimension, works in nether / end)
+    - bound compass(es) pointing to a particular location? (options: location(s) on hud, present in nether/end,
+        works in nether/end)
+    - strict compass pointing north always (options: location on hud, present in each dimension, works in nether/end)

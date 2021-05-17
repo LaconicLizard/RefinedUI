@@ -31,7 +31,7 @@ public abstract class TextFieldWidget_Mixin extends AbstractButtonWidget {
                 && mouseX >= (double) this.x && mouseX < (double) (this.x + this.width)
                 && mouseY >= (double) this.y && mouseY < (double) (this.y + this.height)
                 && isFocused()  // check that we're focused
-                && button == Config.get().textFieldClear_button) {  // check that it's the correct button
+                && Config.textFieldClear_keyBinding.matchesMouse(button)) {  // check that it's the correct button
             this.setText("");
         }
     }
