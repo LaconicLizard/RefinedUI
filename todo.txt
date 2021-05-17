@@ -1,7 +1,6 @@
 
 
 Fixes / unfinished:
-- fix the graphics cyclic button going forwards instead of backwards
 - fix 2-option buttons not responding to right click
 - fix world creation buttons not responding to right click
 - add cycleButtonBack to README.md
