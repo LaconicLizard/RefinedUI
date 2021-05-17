@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "id": "refinedui",
+  "version": "${version}",
+  "name": "RefinedUI",
+  "description": "Miscellaneous unobtrusive user-interface improvements for MineCraft.",
+  "authors": [
+    "LaconicLizard"
+  ],
+  "contact": {
+    "repo": "https://github.com/LaconicLizard/RefinedUI.git"
+  },
+  "license": "MIT",
+  "icon": "assets/refinedui/icon.png",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "lacliz.refinedui.client.RefinedUIClient"
+    ],
+    "main": [
+      "lacliz.refinedui.RefinedUI"
+    ]
+  },
+  "mixins": [
+    "refinedui.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.11.3",
+    "fabric": "*",
+    "minecraft": "1.16.5"
+  }
+}

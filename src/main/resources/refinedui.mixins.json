@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "lacliz.refinedui.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "TextFieldWidget_Mixin"
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
