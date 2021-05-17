@@ -23,15 +23,15 @@ public abstract class TextFieldWidget_Mixin extends AbstractButtonWidget {
 
     @Inject(method = "mouseClicked(DDI)Z", at = @At("HEAD"))
     public void mouseClicked(double mouseX, double mouseY, int button, CallbackInfoReturnable<Boolean> cir) {
-        // when right-clicking a text field, clear its contents
+        // when clicking a text field with the appropriate button, clear its contents
         // requires that this TextFieldWidget be focused (to prevent accidentally clearing stuff)
-        if (Config.get().rightClickClear  // controlled via config
+        if (Config.get().textFieldClear  // controlled via config
                 && isVisible()  // check visible
                 // check we clicked on this
                 && mouseX >= (double) this.x && mouseX < (double) (this.x + this.width)
                 && mouseY >= (double) this.y && mouseY < (double) (this.y + this.height)
                 && isFocused()  // check that we're focused
-                && button == 1) {  // check that it's a right click
+                && button == Config.get().textFieldClear_button) {  // check that it's the correct button
             this.setText("");
         }
     }

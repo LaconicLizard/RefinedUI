@@ -5,6 +5,7 @@ import net.fabricmc.loader.api.FabricLoader;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
+import java.math.BigDecimal;
 import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
@@ -18,11 +19,12 @@ public class Config {
     private static final Path CONFIG_FILE = FabricLoader.getInstance().getConfigDir().resolve(RefinedUI.MOD_ID + ".config.json");
     private static Config INSTANCE = null;
 
-    public final boolean rightClickClear;
+    public final boolean textFieldClear;
+    public final int textFieldClear_button;
 
     /**
      * Construct a Config object, reading from the given mapping from option name -> value.
-     * Default values will be filled in automatically.
+     * Default values will be filled in automatically.  Unrecognized keys will be ignored.
      *
      * @param config Map from option name -> value of all values to load.  Absent options will be filled with the
      *               default value.
@@ -30,7 +32,10 @@ public class Config {
      * @throws IllegalArgumentException if an option in config has been given an invalid value
      */
     private Config(Map<String, Object> config) {
-        rightClickClear = (boolean) config.getOrDefault("rightClickClear", true);
+        textFieldClear = (boolean) config.getOrDefault("textFieldClear", true);
+        textFieldClear_button = ((BigDecimal) config.getOrDefault("textFieldClear_button", BigDecimal.ONE)).intValueExact();
+        if (textFieldClear_button < 0 || textFieldClear_button >= 15) throw new IllegalArgumentException(
+                "textFieldClear_button value out of allowed range of [0,16): got " + textFieldClear_button);
     }
 
     public static Config get() {
@@ -74,13 +79,14 @@ public class Config {
             try {
                 return new Config(m);
             } catch (ClassCastException | IllegalArgumentException e) {
-                throw new JsonParseException("");
+                throw new JsonParseException("", e);
             }
         }
 
         @Override public JsonElement serialize(Config src, Type typeOfSrc, JsonSerializationContext context) {
             JsonObject o = new JsonObject();
-            o.addProperty("rightClickClear", src.rightClickClear);
+            o.addProperty("textFieldClear", src.textFieldClear);
+            o.addProperty("textFieldClear_button", src.textFieldClear_button);
             return o;
         }
 
