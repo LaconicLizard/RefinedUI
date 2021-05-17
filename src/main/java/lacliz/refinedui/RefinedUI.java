@@ -13,8 +13,6 @@ public class RefinedUI implements ModInitializer {
             .registerTypeAdapter(Config.class, Config.JSONER)
             .create();
 
-    // todo get icon
-
     @Override public void onInitialize() {
         Config.load();  // to ensure that it is loaded and any issues are detected immediately
         try {  // to write the file so that user can edit it if they want (and see all the options)
