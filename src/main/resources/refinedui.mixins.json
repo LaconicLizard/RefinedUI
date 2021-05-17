@@ -4,6 +4,8 @@
   "package": "lacliz.refinedui.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
+    "KeyBinding_Mixin",
+    "OptionButtonWidget_Mixin",
     "TextFieldWidget_Mixin"
   ],
   "client": [

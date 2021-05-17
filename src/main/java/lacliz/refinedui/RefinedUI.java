@@ -3,6 +3,10 @@ package lacliz.refinedui;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
+import net.fabricmc.fabric.mixin.client.keybinding.KeyBindingAccessor;
+import net.minecraft.client.gui.screen.options.ControlsListWidget;
+import net.minecraft.client.options.KeyBinding;
 
 import java.io.IOException;
 

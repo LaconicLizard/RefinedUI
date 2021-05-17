@@ -1,11 +1,16 @@
 
 
+Fixes / unfinished:
+- fix the graphics cyclic button going forwards instead of backwards
+- fix 2-option buttons not responding to right click
+- fix world creation buttons not responding to right click
+- add cycleButtonBack to README.md
+
+
 Improvements / refinements:
 
 
 Features:
-- right-click on cycling buttons to go the other direction
-    - in particular, the graphics "fast / fancy / fabulous" button, to allow skipping "fabulous" if your pc can't handle it
 - keybind to use item in off hand even if main hand has an action
     - likely implemented as swap-and-use-and-swap-back
     - conflict between block-picking and use-offhand; which button to default to? 3?

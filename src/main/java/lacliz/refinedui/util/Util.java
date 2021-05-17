@@ -1,4 +1,4 @@
-package lacliz.refinedui;
+package lacliz.refinedui.util;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;

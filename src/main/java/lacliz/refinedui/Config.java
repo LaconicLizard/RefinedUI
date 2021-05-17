@@ -16,7 +16,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static lacliz.refinedui.RefinedUI.MOD_ID;
-import static lacliz.refinedui.Util.normalizeJsonElement;
+import static lacliz.refinedui.util.Util.normalizeJsonElement;
 
 public class Config {
 
@@ -31,6 +31,14 @@ public class Config {
             "category." + MOD_ID + ".textFieldClearButton"
     ));
 
+    public final boolean cycleButtonBack;
+    public static final KeyBinding cycleButtonBack_keyBinding = KeyBindingHelper.registerKeyBinding(new KeyBinding(
+            "key." + MOD_ID + ".cycleButtonBackButton",
+            InputUtil.Type.MOUSE,
+            GLFW.GLFW_MOUSE_BUTTON_RIGHT,
+            "category." + MOD_ID + ".cycleButtonBackButton"
+    ));
+
     /**
      * Construct a Config object, reading from the given mapping from option name -> value.
      * Default values will be filled in automatically.  Unrecognized keys will be ignored.
@@ -42,6 +50,7 @@ public class Config {
      */
     private Config(Map<String, Object> config) {
         textFieldClear = (boolean) config.getOrDefault("textFieldClear", true);
+        cycleButtonBack = (boolean) config.getOrDefault("cycleButtonBack", true);
     }
 
     public static Config get() {
@@ -92,6 +101,7 @@ public class Config {
         @Override public JsonElement serialize(Config src, Type typeOfSrc, JsonSerializationContext context) {
             JsonObject o = new JsonObject();
             o.addProperty("textFieldClear", src.textFieldClear);
+            o.addProperty("cycleButtonBack", src.cycleButtonBack);
             return o;
         }
 
