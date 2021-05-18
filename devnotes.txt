@@ -4,7 +4,8 @@ textFieldClear:
 - Uses TextfieldWidget_Mixin
 
 cycleButtonBack:
-- Uses OptionButtonWidget_Mixin, ButtonWidget_Mixin, CreateWorldScreen_Accessor, Difficulty_Accessor, DifficultyMixin
+- Uses OptionButtonWidget_Mixin, ButtonWidget_Mixin, CreateWorldScreen_Accessor, Difficulty_Accessor, DifficultyMixin,
+    EditGameRulesScreen_Accessor, EditGameRulesScreen_BooleanRuleWidget_Accessor
 - Uses access widener on CreateWorldScreen$Mode
 
 

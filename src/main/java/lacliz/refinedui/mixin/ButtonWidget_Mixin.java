@@ -5,6 +5,7 @@ import lacliz.refinedui.accessors.Difficulty_Accessor;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.world.CreateWorldScreen;
+import net.minecraft.client.gui.screen.world.EditGameRulesScreen;
 import net.minecraft.client.gui.widget.AbstractButtonWidget;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import org.spongepowered.asm.mixin.Mixin;
@@ -60,6 +61,21 @@ public abstract class ButtonWidget_Mixin extends AbstractButtonWidget {
                                 cwsa.invokeTweakDefaultsTo(CreateWorldScreen.Mode.HARDCORE);
                         }
                         queueNarration(250);
+                    }
+                } else if (cs instanceof EditGameRulesScreen) {
+                    // handling boolean game rules, so they respond to cycleButtonBack
+                    EditGameRulesScreen_Accessor egrsa = (EditGameRulesScreen_Accessor) cs;
+                    EditGameRulesScreen.RuleListWidget rlw = egrsa.getRuleListWidget();
+                    EditGameRulesScreen_BooleanRuleWidget_Accessor brwa;
+                    for (EditGameRulesScreen.AbstractRuleWidget arw : rlw.children()) {
+                        if (arw instanceof EditGameRulesScreen.BooleanRuleWidget) {
+                            brwa = (EditGameRulesScreen_BooleanRuleWidget_Accessor) arw;
+                            if (brwa.getToggleButton() == (Object) this) {
+                                playSound();
+                                onPress();
+                                return true;
+                            }
+                        }
                     }
                 }
             }
