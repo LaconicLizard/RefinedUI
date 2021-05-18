@@ -20,6 +20,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -47,12 +49,22 @@ public class InGameHud_Mixin {
             TextRenderer tr = this.client.textRenderer;
             final int yOffset = -16;
 
+            int ct = refinedui_invCountsCache.get(stack.getItem());
+            // vanilla stacks go to 64, giving a max inventory contents of 2368, excluding armor and crafting window
+            //  thats 4 digits, which we scale the display for
+            // si abbreviation can be used after that, if a modded item makes it possible to have 10k+ items in player's
+            //  inv at a time
+            String countLabel = Util.siRoundedString(new BigDecimal(ct), 4, RoundingMode.FLOOR);
+            int w = tr.getWidth(countLabel);
+            float rx = x + 19 - 2 - w,  // coordinates where label will be drawn
+                    ry = y + 6 + 3 + yOffset;
+
             MatrixStack matrixStack = new MatrixStack();
-            String countLabel = String.valueOf(refinedui_invCountsCache.get(stack.getItem()));
             matrixStack.translate(0.0D, 0.0D, ir.zOffset + 200.0F);
+            // scale down to keep large numbers from overlapping
+            Util.scaleAbout(matrixStack, rx + w, ry, 0d, .7f, .7f, 1f);
             VertexConsumerProvider.Immediate immediate = VertexConsumerProvider.immediate(Tessellator.getInstance().getBuffer());
-            tr.draw(countLabel, (float) (x + 19 - 2 - tr.getWidth(countLabel)),
-                    (float) (y + 6 + 3 + yOffset), 16777215, true,
+            tr.draw(countLabel, rx, ry, 16777215, true,
                     matrixStack.peek().getModel(), immediate, false, 0, 15728880);
             immediate.draw();
         }
