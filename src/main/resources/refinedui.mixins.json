@@ -4,6 +4,9 @@
   "package": "lacliz.refinedui.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
+    "ButtonWidget_Mixin",
+    "CreateWorldScreen_Accessor",
+    "Difficulty_Mixin",
     "KeyBinding_Mixin",
     "OptionButtonWidget_Mixin",
     "TextFieldWidget_Mixin"

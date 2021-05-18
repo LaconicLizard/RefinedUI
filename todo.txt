@@ -1,9 +1,10 @@
 
 
 Fixes / unfinished:
-- fix world creation buttons not responding to right click
+- make game rules dialog (in world creation screen) respond to right click
+- make "more world options" screen buttons respond to right click
 - add cycleButtonBack to README.md
-
+- fix textFieldClear description in README
 
 Improvements / refinements:
 

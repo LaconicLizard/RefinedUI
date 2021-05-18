@@ -78,3 +78,7 @@ publishing {
         // mavenLocal()
     }
 }
+
+minecraft {
+    accessWidener =  file("src/main/resources/refinedui.accesswidener")
+}
