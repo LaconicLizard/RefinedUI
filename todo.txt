@@ -1,7 +1,6 @@
 
 
 Fixes / unfinished:
-- add config setting for hotbarCounts
 
 Improvements / refinements:
 - cache inventory item counts for display above hotbar

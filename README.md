@@ -14,10 +14,12 @@ Currently it has the following functionality:
 
 - `textFieldClear` - clear any text field by right-clicking on it
 - `cycleButtonBack` - for buttons that cycle through options, right click to cycle backwards
+- `hotbarCounts` - displays total number of an item in your inventory over the corresponding hotbar slot
 
-Every piece of functionality listed above can be enabled or disabled via the configuration file.  Additional options may also be present there once additional functionality has been added.
+Every piece of functionality listed above can be enabled or disabled via the configuration file.  Additional options may also be present there once further functionality has been added.
 
 Here is detailed list of all configuration options:
 
 - `textFieldClear` (`true` / `false` ; default `true`) - whether the `textFieldClear` functionality is active.  When active, pressing the bound mouse button on a focused `TextFieldWidget` will clear the contents of that widget.
 - `cycleButtonBack` (`true` / `false` ; default `true`) - whether the `cycleButtonBack` functionality is active.  When active, pressing the bound mouse button on a cyclic options button will cycle it backwards instead of forwards.
+- `hotbarCounts` (`true` / `false` ; default `true`) - whether or not `hotbarCounts` functionality is active.  When active, displays the total number of an item in your inventory over the corresponding hotbar slot.  For example, if you have two stacks of bricks in your inventory and are holding one brick in your hotbar, then `129` will be displayed over that hotbar slot.

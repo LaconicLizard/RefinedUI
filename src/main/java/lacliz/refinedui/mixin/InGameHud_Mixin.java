@@ -1,5 +1,6 @@
 package lacliz.refinedui.mixin;
 
+import lacliz.refinedui.Config;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.hud.InGameHud;
@@ -26,7 +27,7 @@ public class InGameHud_Mixin {
     @Inject(method = "renderHotbarItem(IIFLnet/minecraft/entity/player/PlayerEntity;Lnet/minecraft/item/ItemStack;)V",
             at = @At("RETURN"))
     public void post_renderHotbarItem(int x, int y, float tickDelta, PlayerEntity player, ItemStack stack, CallbackInfo ci) {
-        if (!stack.isEmpty()) {
+        if (Config.get().hotbarCounts && !stack.isEmpty()) {
             // adapted from ItemRenderer.renderGuiItemOverlay
             ItemRenderer ir = this.itemRenderer;
             TextRenderer tr = this.client.textRenderer;

@@ -39,6 +39,8 @@ public class Config {
             "category." + MOD_ID + ".cycleButtonBackButton"
     ));
 
+    public final boolean hotbarCounts;
+
     /**
      * Construct a Config object, reading from the given mapping from option name -> value.
      * Default values will be filled in automatically.  Unrecognized keys will be ignored.
@@ -51,6 +53,7 @@ public class Config {
     private Config(Map<String, Object> config) {
         textFieldClear = (boolean) config.getOrDefault("textFieldClear", true);
         cycleButtonBack = (boolean) config.getOrDefault("cycleButtonBack", true);
+        hotbarCounts = (boolean) config.getOrDefault("hotbarCounts", true);
     }
 
     public static Config get() {
@@ -102,6 +105,7 @@ public class Config {
             JsonObject o = new JsonObject();
             o.addProperty("textFieldClear", src.textFieldClear);
             o.addProperty("cycleButtonBack", src.cycleButtonBack);
+            o.addProperty("hotbarCounts", src.hotbarCounts);
             return o;
         }
 
