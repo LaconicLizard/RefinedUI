@@ -10,6 +10,7 @@
     "EditGameRulesScreen_Accessor",
     "EditGameRulesScreen_BooleanRuleWidget_Accessor",
     "GeneratorType_Accessor",
+    "InGameHud_Mixin",
     "KeyBinding_Mixin",
     "MoreOptionsDialog_Accessor",
     "OptionButtonWidget_Mixin",

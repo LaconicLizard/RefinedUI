@@ -1,17 +1,16 @@
 
 
 Fixes / unfinished:
+- add config setting for hotbarCounts
 
 Improvements / refinements:
+- cache inventory item counts for display above hotbar
 
 
 Features:
 - keybind to use item in off hand even if main hand has an action
     - likely implemented as swap-and-use-and-swap-back
     - conflict between block-picking and use-offhand; which button to default to? 3?
-- above hotbar (and off-hand!) display total number of those items in inventory
-    - eg. if you have 1000 stone in inventory and a stack in hotbar, then display "1064" above that hotbar slot
-    - nothing above empty slots, including offhand
 - "inverse health bar" on entity models; a small red bar (visible from all angles; possibly multiple bars) that
     increase in size as the entity gets damaged.  Bar should "fill" its space when the entity dies; this is to
     unobtrusively indicate entity health.  (out of theme?)
@@ -28,7 +27,7 @@ Features:
 - clock item: show exact time (pop-up hud?), show real time
     - with hud when held in main/off hand?
 
-Big Features: (likely out of theme)
+Big Features: (likely out of scope)
 - macro creation?  (might be out of theme)
     - perform commands / keypresses / inventory actions in sequence
     - listen for input from chat / events in world

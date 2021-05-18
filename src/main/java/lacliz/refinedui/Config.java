@@ -16,7 +16,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static lacliz.refinedui.RefinedUI.MOD_ID;
-import static lacliz.refinedui.util.Util.normalizeJsonElement;
+import static lacliz.refinedui.Util.normalizeJsonElement;
 
 public class Config {
 
