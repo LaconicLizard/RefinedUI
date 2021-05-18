@@ -9,7 +9,9 @@
     "Difficulty_Mixin",
     "EditGameRulesScreen_Accessor",
     "EditGameRulesScreen_BooleanRuleWidget_Accessor",
+    "GeneratorType_Accessor",
     "KeyBinding_Mixin",
+    "MoreOptionsDialog_Accessor",
     "OptionButtonWidget_Mixin",
     "TextFieldWidget_Mixin"
   ],

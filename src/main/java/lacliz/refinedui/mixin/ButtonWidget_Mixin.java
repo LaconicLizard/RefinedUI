@@ -8,8 +8,13 @@ import net.minecraft.client.gui.screen.world.CreateWorldScreen;
 import net.minecraft.client.gui.screen.world.EditGameRulesScreen;
 import net.minecraft.client.gui.widget.AbstractButtonWidget;
 import net.minecraft.client.gui.widget.ButtonWidget;
+import net.minecraft.client.world.GeneratorType;
+import net.minecraft.world.gen.GeneratorOptions;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+
+import java.util.List;
+import java.util.Optional;
 
 @Mixin(ButtonWidget.class)
 public abstract class ButtonWidget_Mixin extends AbstractButtonWidget {
@@ -35,7 +40,9 @@ public abstract class ButtonWidget_Mixin extends AbstractButtonWidget {
                 Screen cs = MinecraftClient.getInstance().currentScreen;
                 if (cs == null) return false;
                 if (cs instanceof CreateWorldScreen) {
+                    // ----- main screen (not more options dialog) -----
                     CreateWorldScreen_Accessor cwsa = (CreateWorldScreen_Accessor) cs;
+                    MoreOptionsDialog_Accessor moda = (MoreOptionsDialog_Accessor) ((CreateWorldScreen) cs).moreOptionsDialog;
                     if ((Object) this == cwsa.getDifficultyButton()) {  // cycle difficulty back
                         // adapted from original lambda in CreateWorldScreen
                         playSound();
@@ -60,6 +67,43 @@ public abstract class ButtonWidget_Mixin extends AbstractButtonWidget {
                             case CREATIVE:
                                 cwsa.invokeTweakDefaultsTo(CreateWorldScreen.Mode.HARDCORE);
                         }
+                        queueNarration(250);
+                    }
+                    // ----- more options dialog -----
+                    else if ((Object) this == moda.getBonusItemsButton()) {
+                        playSound();
+                        onPress();
+                    } else if ((Object) this == moda.getMapTypeButton()) {
+                        playSound();
+                        // adapted from mapTypeButton initializer on MoreOptionsDialog
+                        while (true) {
+                            Optional<GeneratorType> gt = moda.getGeneratorType();
+                            if (gt.isPresent()) {
+                                List<GeneratorType> vals = GeneratorType_Accessor.getVALUES();
+                                // the big change:
+                                int i = vals.indexOf(gt.get()) - 1;
+                                if (i < 0) {
+                                    i = vals.size() - 1;
+                                }
+
+                                GeneratorType generatorType = vals.get(i);
+                                moda.setGeneratorType(Optional.of(generatorType));
+                                GeneratorOptions gopts = moda.getGeneratorOptions();
+                                gopts = generatorType.createDefaultOptions(moda.getRegistryManager(),
+                                        gopts.getSeed(), gopts.shouldGenerateStructures(),
+                                        gopts.hasBonusChest());
+                                moda.setGeneratorOptions(gopts);
+                                if (gopts.isDebugWorld() && !Screen.hasShiftDown()) {
+                                    continue;
+                                }
+                            }
+                            ((CreateWorldScreen) cs).setMoreOptionsOpen();
+                            queueNarration(250);
+                            return true;
+                        }
+                    } else if ((Object) this == moda.getMapFeaturesButton()) {
+                        playSound();
+                        moda.setGeneratorOptions(moda.getGeneratorOptions().toggleGenerateStructures());
                         queueNarration(250);
                     }
                 } else if (cs instanceof EditGameRulesScreen) {
