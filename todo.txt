@@ -14,10 +14,6 @@ Features:
     unobtrusively indicate entity health.  (out of theme?)
 - entity info picking: in the vein of health bars, pick an entity (eg. with mmb) to display information about it in chat
     (might be out of theme?)
-- show hunger saturation (is there a mod that already does this?  is this even client-side?)
-- show how much hunger/saturation the held food item will fill (is there a mod that already does this?
-    is this even client-side?)
-    - also display this in tooltips
 - armor: when holding in hand / hovering over an armor piece, indicate visually i) how much armor it provides, and
     ii) what the difference is between that and the currently equipped armor
 - armor: when using an armor item (option: of equal or better quality) with an existing armor item equipped, swap

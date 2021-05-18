@@ -1,8 +1,17 @@
 
+Features:
+    - textFieldClear: uses TextFieldWidget_Mixin
+    - cycleButtonBack: uses OptionButtonWidget_Mixin for the correctly implemented buttons, ButtonWidget_Mixin for the rest.
+        Also requires lots of accessors.
+    - hotbarCounts: uses InGameHud_Mixin
 
-textFieldClear: uses TextFieldWidget_Mixin
-
-cycleButtonBack: uses OptionButtonWidget_Mixin for the correctly implemented buttons, ButtonWidget_Mixin for the rest.
-    Also requires lots of accessors.
-
-hotbarCounts: uses InGameHud_Mixin
+Omitted Features:
+    In-scope:
+        - Display saturation on hunger bar; display hunger/saturation amounts on food items when hovering/holding them.
+            Reason: this functionality is already provided by the mod "AppleSkin" (https://github.com/squeek502/AppleSkin)
+            AppleSkin is as client-side as it can get; a bit of testing with ClientPlayNetworkHandler indicates that
+            the server does not send saturation-updating packets unless the player's health/hunger changes.  AppleSkin,
+            despite saying that it "should" be on the server side as well, functions as well as it can as a client-side
+            mod.  To avoid duplicating functionality, we leave this to them.
+    Out of Scope:
+        -
