@@ -13,10 +13,11 @@ The scope of the mod is limited as follows:
 Currently it has the following functionality:
 
 - `textFieldClear` - clear any text field by right-clicking on it
+- `cycleButtonBack` - for buttons that cycle through options, right click to cycle backwards
 
 Every piece of functionality listed above can be enabled or disabled via the configuration file.  Additional options may also be present there once additional functionality has been added.
 
 Here is detailed list of all configuration options:
 
-- `textFieldClear` (`true` / `false` ; default `true`) - whether the `textFieldClear` functionality is active.  When active, pressing the specified mouse button (`textFieldClear_button`) on a focused `TextFieldWidget` will clear the contents of that widget.  
-More simply, right-click a place where you type text to erase all of the text currently there.
+- `textFieldClear` (`true` / `false` ; default `true`) - whether the `textFieldClear` functionality is active.  When active, pressing the bound mouse button on a focused `TextFieldWidget` will clear the contents of that widget.
+- `cycleButtonBack` (`true` / `false` ; default `true`) - whether the `cycleButtonBack` functionality is active.  When active, pressing the bound mouse button on a cyclic options button will cycle it backwards instead of forwards.
