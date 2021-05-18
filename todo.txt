@@ -1,9 +1,9 @@
 
 
 Fixes / unfinished:
+- slightly reduce scale of hotbarCounts so that adjacent slots with large numbers do not overlap
 
 Improvements / refinements:
-- cache inventory item counts for display above hotbar
 
 
 Features:

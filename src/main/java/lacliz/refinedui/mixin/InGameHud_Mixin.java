@@ -1,6 +1,7 @@
 package lacliz.refinedui.mixin;
 
 import lacliz.refinedui.Config;
+import lacliz.refinedui.Util;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.hud.InGameHud;
@@ -10,6 +11,7 @@ import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.item.ItemRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -18,11 +20,23 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @Mixin(InGameHud.class)
 public class InGameHud_Mixin {
 
     @Shadow @Final private ItemRenderer itemRenderer;
     @Shadow @Final private MinecraftClient client;
+
+    // cache of the total counts of each item in player inventory
+    // recalculated once per frame
+    // dev note: chose to recalculate once per frame because attempting to intercept all inventory-altering
+    //      events is a delicate solution that may be broken by any mods accessing things in unorthodox ways.
+    //  And when the counts become desynchronized from the actual inventory this functionality becomes useless.
+    //  Lastly, iterating the player's inventory once per frame is rather low overhead anyways, even if it leaves
+    //      a bad taste in my mouth.
+    private Map<Item, Integer> refinedui_invCountsCache = new HashMap<>();
 
     @Inject(method = "renderHotbarItem(IIFLnet/minecraft/entity/player/PlayerEntity;Lnet/minecraft/item/ItemStack;)V",
             at = @At("RETURN"))
@@ -31,12 +45,10 @@ public class InGameHud_Mixin {
             // adapted from ItemRenderer.renderGuiItemOverlay
             ItemRenderer ir = this.itemRenderer;
             TextRenderer tr = this.client.textRenderer;
-            ClientPlayerEntity cpe = MinecraftClient.getInstance().player;
-            if (cpe == null) return;
             final int yOffset = -16;
 
             MatrixStack matrixStack = new MatrixStack();
-            String countLabel = String.valueOf(cpe.inventory.count(stack.getItem()));
+            String countLabel = String.valueOf(refinedui_invCountsCache.get(stack.getItem()));
             matrixStack.translate(0.0D, 0.0D, ir.zOffset + 200.0F);
             VertexConsumerProvider.Immediate immediate = VertexConsumerProvider.immediate(Tessellator.getInstance().getBuffer());
             tr.draw(countLabel, (float) (x + 19 - 2 - tr.getWidth(countLabel)),
@@ -44,6 +56,14 @@ public class InGameHud_Mixin {
                     matrixStack.peek().getModel(), immediate, false, 0, 15728880);
             immediate.draw();
         }
+    }
+
+    @Inject(method = "renderHotbar(FLnet/minecraft/client/util/math/MatrixStack;)V",
+            at = @At("HEAD"))
+    public void pre_renderHotbar(float tickDelta, MatrixStack matrices, CallbackInfo ci) {
+        ClientPlayerEntity cpe = MinecraftClient.getInstance().player;
+        if (cpe == null) return;
+        refinedui_invCountsCache = Util.itemCounts(cpe.inventory);
     }
 
 }

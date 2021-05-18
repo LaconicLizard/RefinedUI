@@ -3,8 +3,6 @@ package lacliz.refinedui;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import net.fabricmc.api.ModInitializer;
-import net.minecraft.client.render.GameRenderer;
-import net.minecraft.client.render.item.ItemRenderer;
 
 import java.io.IOException;
 

@@ -4,12 +4,39 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
+import net.minecraft.inventory.Inventory;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class Util {
 
+    /**
+     * Map from item -> total amount of that item in inv for all items in inv.
+     *
+     * @param inv inventory of interest
+     * @return map item -> total amount of that item in inv
+     */
+    public static Map<Item, Integer> itemCounts(Inventory inv) {
+        Map<Item, Integer> result = new HashMap<>(inv.size());
+        for (int j = 0; j < inv.size(); ++j) {
+            ItemStack stack = inv.getStack(j);
+            result.compute(stack.getItem(), (key, oldValue) -> oldValue == null
+                    ? stack.getCount()
+                    : oldValue + stack.getCount());
+        }
+        return result;
+    }
+
+    /**
+     * Normalizes a JSON element into its corresponding java form.
+     * Note that this method is recursive, and as such should not be used on highly-nested input.
+     *
+     * @param elt JsonElement to normalize
+     * @return normalized element
+     */
     public static Object normalizeJsonElement(JsonElement elt) {
         if (elt.isJsonPrimitive()) {
             JsonPrimitive p = elt.getAsJsonPrimitive();
