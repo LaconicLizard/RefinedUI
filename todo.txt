@@ -1,6 +1,7 @@
 
 
 Fixes / unfinished:
+- do something better with licence?
 
 Improvements / refinements:
 
@@ -20,6 +21,8 @@ Features:
     them out instead of doing nothing
 - clock item: show exact time (pop-up hud?), show real time
     - with hud when held in main/off hand?
+- (out of scope, but an idea) Fork and modify AppleSkin mod to simulate saturation usage client-side.
+
 
 Big Features: (likely out of scope)
 - macro creation?  (might be out of theme)

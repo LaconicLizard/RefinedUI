@@ -20,8 +20,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -54,7 +52,8 @@ public class InGameHud_Mixin {
             //  thats 4 digits, which we scale the display for
             // si abbreviation can be used after that, if a modded item makes it possible to have 10k+ items in player's
             //  inv at a time
-            String countLabel = Util.siRoundedString(new BigDecimal(ct), 4, RoundingMode.FLOOR);
+            String countLabel = String.valueOf(ct);
+            if (countLabel.length() > 4) countLabel = "9999";
             int w = tr.getWidth(countLabel);
             float rx = x + 19 - 2 - w,  // coordinates where label will be drawn
                     ry = y + 6 + 3 + yOffset;
