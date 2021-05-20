@@ -1,27 +1,32 @@
 package lacliz.refinedui;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import me.shedaniel.autoconfig.AutoConfig;
+import me.shedaniel.autoconfig.ConfigHolder;
+import me.shedaniel.autoconfig.serializer.GsonConfigSerializer;
 import net.fabricmc.api.ModInitializer;
-
-import java.io.IOException;
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 
 public class RefinedUI implements ModInitializer {
 
     public static final String MOD_ID = "refinedui";
-    public static final Gson GSON = new GsonBuilder().setPrettyPrinting()
-            .registerTypeAdapter(Config.class, Config.JSONER)
-            .create();
 
     @Override public void onInitialize() {
-        Config.load();  // to ensure that it is loaded and any issues are detected immediately
-        try {  // to write the file so that user has an example to edit
-            Config.get().save();
-        } catch (IOException e) {
-            throw new Error(e);
+        // register config, load it
+        AutoConfig.register(RUIConfig.class, GsonConfigSerializer::new);
+        CONFIG_HOLDER = AutoConfig.getConfigHolder(RUIConfig.class);
+        CONFIG_HOLDER.get();
+    }
+
+    private static ConfigHolder<RUIConfig> CONFIG_HOLDER = null;
+
+    public static RUIConfig getConfig() {
+        ConfigHolder<RUIConfig> ch;
+        while ((ch = CONFIG_HOLDER) == null) {
+            try {
+                Thread.sleep(1);
+            } catch (InterruptedException ignored) {
+            }
         }
+        return ch.get();
     }
 
 }

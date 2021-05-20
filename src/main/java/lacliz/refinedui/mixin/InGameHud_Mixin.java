@@ -1,6 +1,5 @@
 package lacliz.refinedui.mixin;
 
-import lacliz.refinedui.Config;
 import lacliz.refinedui.Util;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
@@ -23,6 +22,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import java.util.HashMap;
 import java.util.Map;
 
+import static lacliz.refinedui.RefinedUI.getConfig;
+
 @Mixin(InGameHud.class)
 public class InGameHud_Mixin {
 
@@ -41,7 +42,7 @@ public class InGameHud_Mixin {
     @Inject(method = "renderHotbarItem(IIFLnet/minecraft/entity/player/PlayerEntity;Lnet/minecraft/item/ItemStack;)V",
             at = @At("RETURN"))
     public void post_renderHotbarItem(int x, int y, float tickDelta, PlayerEntity player, ItemStack stack, CallbackInfo ci) {
-        if (Config.get().hotbarCounts && !stack.isEmpty()) {
+        if (getConfig().hotbarCounts && !stack.isEmpty()) {
             // adapted from ItemRenderer.renderGuiItemOverlay
             ItemRenderer ir = this.itemRenderer;
             TextRenderer tr = this.client.textRenderer;

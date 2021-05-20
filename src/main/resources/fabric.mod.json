@@ -3,7 +3,7 @@
   "id": "refinedui",
   "version": "${version}",
   "name": "RefinedUI",
-  "description": "Miscellaneous unobtrusive user-interface improvements for MineCraft.",
+  "description": "Miscellaneous unobtrusive user-interface improvements for Minecraft.",
   "authors": [
     "LaconicLizard"
   ],
@@ -14,6 +14,9 @@
   "icon": "assets/refinedui/icon.png",
   "environment": "client",
   "entrypoints": {
+    "modmenu": [
+      "lacliz.refinedui.RUIModMenuEP"
+    ],
     "client": [
       "lacliz.refinedui.client.RefinedUIClient"
     ],
@@ -25,9 +28,13 @@
     "refinedui.mixins.json"
   ],
   "depends": {
+    "cloth-config2": ">=4.11.26",
     "fabricloader": ">=0.11.3",
     "fabric": "*",
     "minecraft": "1.16.5"
+  },
+  "recommends": {
+    "modmenu": ">=1.16.9"
   },
   "accessWidener": "refinedui.accesswidener"
 }

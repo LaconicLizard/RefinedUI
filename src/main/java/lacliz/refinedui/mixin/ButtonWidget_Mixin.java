@@ -1,6 +1,6 @@
 package lacliz.refinedui.mixin;
 
-import lacliz.refinedui.Config;
+import lacliz.refinedui.RUIKeybinds;
 import lacliz.refinedui.accessors.Difficulty_Accessor;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Screen;
@@ -15,6 +15,8 @@ import org.spongepowered.asm.mixin.Shadow;
 
 import java.util.List;
 import java.util.Optional;
+
+import static lacliz.refinedui.RefinedUI.getConfig;
 
 @Mixin(ButtonWidget.class)
 public abstract class ButtonWidget_Mixin extends AbstractButtonWidget {
@@ -36,7 +38,7 @@ public abstract class ButtonWidget_Mixin extends AbstractButtonWidget {
                 playSound();
                 this.onClick(mouseX, mouseY);
                 return true;
-            } else if (Config.cycleButtonBack_keyBinding.matchesMouse(button)) {
+            } else if (getConfig().cycleButtonBack && RUIKeybinds.cycleButtonBack_keyBinding.matchesMouse(button)) {
                 Screen cs = MinecraftClient.getInstance().currentScreen;
                 if (cs == null) return false;
                 if (cs instanceof CreateWorldScreen) {
