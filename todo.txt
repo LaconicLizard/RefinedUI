@@ -4,7 +4,6 @@ Fixes / unfinished:
 - make modmenu respond to cyclebuttonback
 - check if modmenu responds to textfieldclear, fix if not
 - do something better with licence?
-- add translations for modmenu options and tooltips
 
 Improvements / refinements:
 

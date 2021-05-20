@@ -1,0 +1,6 @@
+{
+  "text.autoconfig.refinedui.title": "RefinedUI Config",
+  "text.autoconfig.refinedui.option.textFieldClear": "Erase text fields with alt-click",
+  "text.autoconfig.refinedui.option.cycleButtonBack": "Move cyclic buttons backwards with alt-click",
+  "text.autoconfig.refinedui.option.hotbarCounts": "Display total item quantities over hotbar"
+}
