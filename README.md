@@ -37,7 +37,7 @@ ButtonWidget buttonWidget = new ButtonWidget(..., (widget) -> {
     this.value = (this.value + 1) % this.size;  // this moves value "forward"
 });
 
-// new code
+// new code:
 ButtonWidget buttonWiget = new ReversibleCyclicButton(..., (widget) -> {
     this.value = (this.value + 1) % this.size;
 }, (widget) -> {
