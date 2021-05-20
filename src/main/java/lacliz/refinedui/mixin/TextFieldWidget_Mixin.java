@@ -1,6 +1,7 @@
 package lacliz.refinedui.mixin;
 
 import lacliz.refinedui.RUIKeybinds;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.widget.AbstractButtonWidget;
 import net.minecraft.client.gui.widget.TextFieldWidget;
 import org.spongepowered.asm.mixin.Mixin;
@@ -36,6 +37,7 @@ public abstract class TextFieldWidget_Mixin extends AbstractButtonWidget {
                 && isFocused()  // check that we're focused
                 && RUIKeybinds.textFieldClear_keyBinding.matchesMouse(button)) {  // check that it's the correct button
             LOGGER.info("clearing TextFieldWidget");
+            this.playDownSound(MinecraftClient.getInstance().getSoundManager());
             this.setText("");
         }
     }
