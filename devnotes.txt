@@ -1,9 +1,4 @@
 
-Features:
-    - textFieldClear: uses TextFieldWidget_Mixin
-    - cycleButtonBack: uses OptionButtonWidget_Mixin for the correctly implemented buttons, ButtonWidget_Mixin for the rest.
-        Also requires lots of accessors.
-    - hotbarCounts: uses InGameHud_Mixin
 
 Misc:
     - cloth-config button mixin not necessary for enum types, because they are not edited via buttons (rather drop-downs)

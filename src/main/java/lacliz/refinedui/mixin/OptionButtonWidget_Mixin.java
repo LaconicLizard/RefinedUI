@@ -12,6 +12,7 @@ import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 
+import static lacliz.refinedui.RefinedUI.LOGGER;
 import static lacliz.refinedui.RefinedUI.getConfig;
 
 @Mixin(OptionButtonWidget.class)
@@ -27,6 +28,7 @@ public abstract class OptionButtonWidget_Mixin extends ButtonWidget implements O
         // when pressing a cyclic option button, cycle backwards when the correct mouse button is pressed
         if (getConfig().cycleButtonBack  // check enabled
                 && RUIKeybinds.cycleButtonBack_keyBinding.matchesMouse(button)  // and it's the right button
+                && this.clicked(mouseX, mouseY)  // and clicked within boundaries
                 && (this.option instanceof CyclingOption || this.option instanceof BooleanOption)) {  // and the option is supported
             // modified from sauce: AbstractButtonWiget.mouseClicked
             if (this.active && this.visible && this.clicked(mouseX, mouseY)) {
@@ -38,6 +40,7 @@ public abstract class OptionButtonWidget_Mixin extends ButtonWidget implements O
                     // the following special cases have badly implemented .cycle(...) methods, and
                     // require specific overrides to their behavior
                     if (option == Option.GRAPHICS) {
+                        LOGGER.info("backcycling OptionButtonWidget - Graphics ButtonWidget");
                         // this block adapted from Option class' static initializer where it sets GRAPHICS
                         VideoWarningManager videoWarningManager = client.getVideoWarningManager();
                         GraphicsMode nextMode = GraphicsMode.byId(options.graphicsMode.getId() - 1);
@@ -51,22 +54,26 @@ public abstract class OptionButtonWidget_Mixin extends ButtonWidget implements O
                             }
                             client.worldRenderer.reload();
                         }
+                        // no return yet
                     } else {  // normal case
                         co.cycle(options, -1);  // cycle back instead of forwards
+                        // no return yet
                     }
                     // taken from CyclingOption.createButton
                     setMessage(co.getMessage(options));  // update button message
                     return true;
                 } else if (this.option instanceof BooleanOption) {  // check not necessary, but doing it for organization
+                    LOGGER.info("backcycling OptionButtonWidget with BooleanOption");
                     BooleanOption bo = (BooleanOption) this.option;
                     bo.toggle(options);
                     // from BooleanOption.createButton
                     setMessage(bo.getDisplayString(options));
+                    return true;
                 }
             }
-            return false;
-        } else {  // act normal
-            return super.mouseClicked(mouseX, mouseY, button);
         }
+        // otherwise let the normal implemenation handle it
+        return super.mouseClicked(mouseX, mouseY, button);
     }
+
 }

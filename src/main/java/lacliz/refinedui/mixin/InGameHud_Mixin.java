@@ -83,7 +83,6 @@ public class InGameHud_Mixin {
         refinedui_invCountsCache = Util.itemCounts(cpe.inventory);
         // draw number of empty slots
         if (getConfig().emptySlotCount) {
-            // todo don't count armor slots
             int nEmptySlots = Util.nEmptySlots(cpe.inventory);
             VertexConsumerProvider.Immediate immediate = VertexConsumerProvider.immediate(Tessellator.getInstance().getBuffer());
             TextRenderer tr = this.client.textRenderer;

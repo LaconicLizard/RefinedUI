@@ -19,6 +19,7 @@ import org.spongepowered.asm.mixin.Shadow;
 import java.util.List;
 import java.util.Optional;
 
+import static lacliz.refinedui.RefinedUI.LOGGER;
 import static lacliz.refinedui.RefinedUI.getConfig;
 
 @Mixin(ButtonWidget.class)
@@ -38,23 +39,24 @@ public abstract class ButtonWidget_Mixin extends AbstractButtonWidget {
         // adapted from AbstractButtonWidget
         if (this.active && this.visible && this.clicked(mouseX, mouseY)) {
             if (this.isValidClickButton(button)) {  // normal functionality (normal click)
-                playSound();
-                this.onClick(mouseX, mouseY);
-                return true;
+                return super.mouseClicked(mouseX, mouseY, button);
             } else if (getConfig().cycleButtonBack && RUIKeybinds.cycleButtonBack_keyBinding.matchesMouse(button)) {
                 //noinspection ConstantConditions
                 if ((Object) this instanceof ReversibleCyclicButton) {  // for api
+                    LOGGER.info("backcycling ReversibleCyclicButton");
                     playSound();
                     ((ReversibleCyclicButton) (Object) this).cycleBackwards.onPress((ButtonWidget) (Object) this);
                     return true;
                 }
-                if (this instanceof ReversibleCyclicButtonI) {
+                if (this instanceof ReversibleCyclicButtonI) {  // also for api
+                    LOGGER.info("backcycling ReversibleCyclicButtonI");
                     playSound();
                     ((ReversibleCyclicButtonI) this).cycleBackwards();
                     return true;
                 }
                 //noinspection SuspiciousMethodCalls
                 if (Util.SOME_BOOLEAN_BUTTONS.contains(this)) {
+                    LOGGER.info("backcycling SOME_BOOLEAN_BUTTONS elt");
                     playSound();
                     onClick(mouseX, mouseY);
                     return true;
@@ -66,6 +68,7 @@ public abstract class ButtonWidget_Mixin extends AbstractButtonWidget {
                     CreateWorldScreen_Accessor cwsa = (CreateWorldScreen_Accessor) cs;
                     MoreOptionsDialog_Accessor moda = (MoreOptionsDialog_Accessor) ((CreateWorldScreen) cs).moreOptionsDialog;
                     if ((Object) this == cwsa.getDifficultyButton()) {  // cycle difficulty back
+                        LOGGER.info("backcycling CreateWorldScreen difficultyButton");
                         // adapted from original lambda in CreateWorldScreen
                         playSound();
                         //noinspection ConstantConditions
@@ -74,9 +77,12 @@ public abstract class ButtonWidget_Mixin extends AbstractButtonWidget {
                         this.queueNarration(250);
                         return true;
                     } else if ((Object) this == cwsa.getEnableCheatsButton()) {
+                        LOGGER.info("backcycling CreateWorldScreen enableCheatsButton");
                         playSound();
                         this.onPress();  // boolean option, so we don't have to do anything special
+                        return true;
                     } else if ((Object) this == cwsa.getGameModeSwitchButton()) {
+                        LOGGER.info("backcycling CreateWorldScreen gameModeSwitchButton");
                         // adapted from original lambda in CreateWorldScreen
                         playSound();
                         switch (cwsa.getCurrentMode()) {
@@ -90,12 +96,16 @@ public abstract class ButtonWidget_Mixin extends AbstractButtonWidget {
                                 cwsa.invokeTweakDefaultsTo(CreateWorldScreen.Mode.HARDCORE);
                         }
                         queueNarration(250);
+                        return true;
                     }
                     // ----- more options dialog -----
                     else if ((Object) this == moda.getBonusItemsButton()) {
+                        LOGGER.info("backcycling CreateWorldScreen bonusItemsButton");
                         playSound();
                         onPress();
+                        return true;
                     } else if ((Object) this == moda.getMapTypeButton()) {
+                        LOGGER.info("backcycling CreateWorldScreen mapTypeButton");
                         playSound();
                         // adapted from mapTypeButton initializer on MoreOptionsDialog
                         while (true) {
@@ -124,9 +134,11 @@ public abstract class ButtonWidget_Mixin extends AbstractButtonWidget {
                             return true;
                         }
                     } else if ((Object) this == moda.getMapFeaturesButton()) {
+                        LOGGER.info("backcycling CreateWorldScreen mapFeaturesButton");
                         playSound();
                         moda.setGeneratorOptions(moda.getGeneratorOptions().toggleGenerateStructures());
                         queueNarration(250);
+                        return true;
                     }
                 } else if (cs instanceof EditGameRulesScreen) {
                     // handling boolean game rules, so they respond to cycleButtonBack
@@ -137,6 +149,7 @@ public abstract class ButtonWidget_Mixin extends AbstractButtonWidget {
                         if (arw instanceof EditGameRulesScreen.BooleanRuleWidget) {
                             brwa = (EditGameRulesScreen_BooleanRuleWidget_Accessor) arw;
                             if (brwa.getToggleButton() == (Object) this) {
+                                LOGGER.info("backcycling EditGameRulesScreen booleanRuleWidget");
                                 playSound();
                                 onPress();
                                 return true;

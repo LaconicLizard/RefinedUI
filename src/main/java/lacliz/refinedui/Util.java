@@ -39,7 +39,7 @@ public class Util {
         return result;
     }
 
-    /** The number of empty slots in inv. */
+    /** The number of empty slots in inv, including offhand. */
     public static int nEmptySlots(PlayerInventory inv) {
         int c = 0;
         for (int i = 0; i < 36; i += 1) {

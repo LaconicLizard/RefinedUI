@@ -22,4 +22,7 @@ public class RUIKeybinds {
             "category." + MOD_ID + ".cycleButtonBackButton"
     ));
 
+    public static void initialize() {
+    }
+
 }
