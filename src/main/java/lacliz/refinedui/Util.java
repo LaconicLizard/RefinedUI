@@ -2,6 +2,7 @@ package lacliz.refinedui;
 
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -36,6 +37,20 @@ public class Util {
                     : oldValue + stack.getCount());
         }
         return result;
+    }
+
+    /** The number of empty slots in inv. */
+    public static int nEmptySlots(PlayerInventory inv) {
+        int c = 0;
+        for (int i = 0; i < 36; i += 1) {
+            if (inv.getStack(i).getCount() == 0) {
+                c += 1;
+            }
+        }
+        if (inv.offHand.get(0).getCount() == 0) {
+            c += 1;
+        }
+        return c;
     }
 
 }

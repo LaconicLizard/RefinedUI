@@ -11,5 +11,6 @@ public class RUIConfig implements ConfigData {
     public boolean textFieldClear = true;
     public boolean cycleButtonBack = true;
     public boolean hotbarCounts = true;
+    public boolean emptySlotCount = true;
 
 }

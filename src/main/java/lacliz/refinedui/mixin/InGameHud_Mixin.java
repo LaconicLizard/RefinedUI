@@ -27,9 +27,13 @@ import static lacliz.refinedui.RefinedUI.getConfig;
 @Mixin(InGameHud.class)
 public class InGameHud_Mixin {
 
+    private static final int COLOR = 16777215, LIGHT = 15728880;
+
     @Shadow @Final private ItemRenderer itemRenderer;
     @Shadow @Final private MinecraftClient client;
 
+    @Shadow private int scaledWidth;
+    @Shadow private int scaledHeight;
     // cache of the total counts of each item in player inventory
     // recalculated once per frame
     // dev note: chose to recalculate once per frame because attempting to intercept all inventory-altering
@@ -64,8 +68,8 @@ public class InGameHud_Mixin {
             // scale down to keep large numbers from overlapping
             Util.scaleAbout(matrixStack, rx + w, ry, 0d, .7f, .7f, 1f);
             VertexConsumerProvider.Immediate immediate = VertexConsumerProvider.immediate(Tessellator.getInstance().getBuffer());
-            tr.draw(countLabel, rx, ry, 16777215, true,
-                    matrixStack.peek().getModel(), immediate, false, 0, 15728880);
+            tr.draw(countLabel, rx, ry, COLOR, true,
+                    matrixStack.peek().getModel(), immediate, false, 0, LIGHT);
             immediate.draw();
         }
     }
@@ -75,7 +79,22 @@ public class InGameHud_Mixin {
     public void pre_renderHotbar(float tickDelta, MatrixStack matrices, CallbackInfo ci) {
         ClientPlayerEntity cpe = MinecraftClient.getInstance().player;
         if (cpe == null) return;
+        // cache inventory counts
         refinedui_invCountsCache = Util.itemCounts(cpe.inventory);
+        // draw number of empty slots
+        if (getConfig().emptySlotCount) {
+            // todo don't count armor slots
+            int nEmptySlots = Util.nEmptySlots(cpe.inventory);
+            VertexConsumerProvider.Immediate immediate = VertexConsumerProvider.immediate(Tessellator.getInstance().getBuffer());
+            TextRenderer tr = this.client.textRenderer;
+            int xBuffer = 8;
+            int x = (int) (this.scaledWidth / 2f + 91 + xBuffer);  // right side of hotbar + buffer space
+            int y = (int) (this.scaledHeight - 23 / 2f - tr.fontHeight / 2f);  // center of hotbar, accounting for text height
+            this.client.textRenderer.draw(String.valueOf(nEmptySlots),
+                    x, y, COLOR, true, matrices.peek().getModel(),
+                    immediate, false, 0, LIGHT);
+            immediate.draw();
+        }
     }
 
 }
