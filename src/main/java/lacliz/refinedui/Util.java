@@ -1,18 +1,18 @@
 package lacliz.refinedui;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonPrimitive;
+import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class Util {
+
+    // weak set of ButtonWidgets that are really boolean buttons
+    public static final Set<ButtonWidget> SOME_BOOLEAN_BUTTONS = Collections.synchronizedSet(
+            Collections.newSetFromMap(new WeakHashMap<>()));
 
     /** Scales the given matrix stack about the given point. */
     public static void scaleAbout(MatrixStack stack, double x, double y, double z, float xscale, float yscale, float zscale) {
@@ -36,41 +36,6 @@ public class Util {
                     : oldValue + stack.getCount());
         }
         return result;
-    }
-
-    /**
-     * Normalizes a JSON element into its corresponding java form.
-     * Note that this method is recursive, and as such should not be used on highly-nested input.
-     *
-     * @param elt JsonElement to normalize
-     * @return normalized element
-     */
-    public static Object normalizeJsonElement(JsonElement elt) {
-        if (elt.isJsonPrimitive()) {
-            JsonPrimitive p = elt.getAsJsonPrimitive();
-            if (p.isBoolean()) return p.getAsBoolean();
-            else if (p.isString()) return p.getAsString();
-            else if (p.isNumber()) return p.getAsBigDecimal();
-            else throw new AssertionError("Unrecognized json primitive type: " + elt);
-        } else if (elt.isJsonObject()) {
-            JsonObject o = elt.getAsJsonObject();
-            Map<String, Object> result = new HashMap<>();
-            for (Map.Entry<String, JsonElement> entry : o.entrySet()) {
-                result.put(entry.getKey(), normalizeJsonElement(entry.getValue()));
-            }
-            return result;
-        } else if (elt.isJsonNull()) {
-            return null;
-        } else if (elt.isJsonArray()) {
-            JsonArray arr = elt.getAsJsonArray();
-            Object[] result = new Object[arr.size()];
-            for (int i = 0; i < arr.size(); i += 1) {
-                result[i] = normalizeJsonElement(arr.get(i));
-            }
-            return result;
-        } else {
-            throw new AssertionError("Unrecognized json type: " + elt);
-        }
     }
 
 }

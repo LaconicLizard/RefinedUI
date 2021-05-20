@@ -5,6 +5,10 @@ Features:
         Also requires lots of accessors.
     - hotbarCounts: uses InGameHud_Mixin
 
+Misc:
+    - cloth-config button mixin not necessary for enum types, because they are not edited via buttons (rather drop-downs)
+    - cloth-config textFieldClear functionality works by default
+
 Omitted Features:
     In-scope:
         - Display saturation on hunger bar; display hunger/saturation amounts on food items when hovering/holding them.

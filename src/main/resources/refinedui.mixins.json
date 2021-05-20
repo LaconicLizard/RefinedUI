@@ -5,6 +5,7 @@
   "compatibilityLevel": "JAVA_8",
   "mixins": [
     "ButtonWidget_Mixin",
+    "ClothConfig_BooleanListEntry_Mixin",
     "CreateWorldScreen_Accessor",
     "Difficulty_Mixin",
     "EditGameRulesScreen_Accessor",
