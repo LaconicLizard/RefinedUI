@@ -2,6 +2,8 @@
 
 Fixes / unfinished:
 - do something better with licence?
+- transition to using HudElements for hotbarCounts and emptySlotCount
+- clean up readme
 
 Improvements / refinements:
 - add icon near emptySlotCount to make its function more apparent
