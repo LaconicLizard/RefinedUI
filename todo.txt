@@ -9,8 +9,6 @@ Fixes / unfinished:
 - fix up config access patterns to use events
 
 Improvements / refinements:
-- add icon near emptySlotCount to make its function more apparent
-- config options to control location of empty slots label
 
 Features (under consideration, maybe maybe not gonna be implemented):
 - display exact durability of tools on-screen when they are held
