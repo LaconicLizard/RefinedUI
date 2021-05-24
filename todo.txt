@@ -1,7 +1,6 @@
 
 
 Fixes / unfinished:
-- fix license
 - clean up readme
 - fix commit authorship
 - add boolean button api
