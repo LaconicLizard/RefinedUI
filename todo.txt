@@ -2,7 +2,6 @@
 
 Fixes / unfinished:
 - clean up readme
-- add boolean button api
 - finish lang stuff
 
 Improvements / refinements:
