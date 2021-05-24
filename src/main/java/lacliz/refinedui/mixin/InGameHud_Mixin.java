@@ -81,19 +81,6 @@ public class InGameHud_Mixin {
         if (cpe == null) return;
         // cache inventory counts
         refinedui_invCountsCache = Util.itemCounts(cpe.inventory);
-        // draw number of empty slots
-        if (getConfig().emptySlotCount) {
-            int nEmptySlots = Util.nEmptySlots(cpe.inventory);
-            VertexConsumerProvider.Immediate immediate = VertexConsumerProvider.immediate(Tessellator.getInstance().getBuffer());
-            TextRenderer tr = this.client.textRenderer;
-            int xBuffer = 8;
-            int x = (int) (this.scaledWidth / 2f + 91 + xBuffer);  // right side of hotbar + buffer space
-            int y = (int) (this.scaledHeight - 23 / 2f - tr.fontHeight / 2f);  // center of hotbar, accounting for text height
-            this.client.textRenderer.draw(String.valueOf(nEmptySlots),
-                    x, y, COLOR, true, matrices.peek().getModel(),
-                    immediate, false, 0, LIGHT);
-            immediate.draw();
-        }
     }
 
 }

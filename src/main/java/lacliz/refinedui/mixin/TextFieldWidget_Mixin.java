@@ -1,6 +1,6 @@
 package lacliz.refinedui.mixin;
 
-import lacliz.refinedui.RUIKeybinds;
+import lacliz.refinedui.internal.RUIKeybinds;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.widget.AbstractButtonWidget;
 import net.minecraft.client.gui.widget.TextFieldWidget;

@@ -13,7 +13,7 @@ group = project.maven_group
 repositories {
     maven { url "https://maven.terraformersmc.com" }  // modmenu
     maven { url "https://maven.shedaniel.me/" }  // cloth config
-    maven { url 'https://jitpack.io' }  // jitpack - for HudElements (mine!)
+    maven { url 'https://jitpack.io' }  // jitpack - for HudElements (mine!), etc.
 }
 
 dependencies {

@@ -15,7 +15,7 @@
   "environment": "client",
   "entrypoints": {
     "modmenu": [
-      "lacliz.refinedui.RUIModMenuEP"
+      "lacliz.refinedui.internal.RUIModMenuEP"
     ],
     "client": [
       "lacliz.refinedui.client.RefinedUIClient"

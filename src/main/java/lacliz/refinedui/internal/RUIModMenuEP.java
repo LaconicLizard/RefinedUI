@@ -1,4 +1,4 @@
-package lacliz.refinedui;
+package lacliz.refinedui.internal;
 
 import com.terraformersmc.modmenu.api.ConfigScreenFactory;
 import com.terraformersmc.modmenu.api.ModMenuApi;

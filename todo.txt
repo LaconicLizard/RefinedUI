@@ -1,9 +1,12 @@
 
 
 Fixes / unfinished:
-- do something better with licence?
-- transition to using HudElements for hotbarCounts and emptySlotCount
+- fix license
+- transition to using HudElements for hotbarCounts
 - clean up readme
+- fix commit authorship
+- add boolean button api
+- fix up config access patterns to use events
 
 Improvements / refinements:
 - add icon near emptySlotCount to make its function more apparent

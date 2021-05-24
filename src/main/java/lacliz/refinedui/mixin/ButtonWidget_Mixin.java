@@ -1,6 +1,6 @@
 package lacliz.refinedui.mixin;
 
-import lacliz.refinedui.RUIKeybinds;
+import lacliz.refinedui.internal.RUIKeybinds;
 import lacliz.refinedui.Util;
 import lacliz.refinedui.accessors.Difficulty_Accessor;
 import lacliz.refinedui.api.ReversibleCyclicButton;
