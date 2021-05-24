@@ -1,23 +1,24 @@
 # RefinedUI
 
-*Miscellaneous unobtrusive user-interface improvements for Minecraft.*
+_Miscellaneous unobtrusive user-interface improvements for Minecraft._
 
-This is a small client-side mod that fixes a number of minor inconveniences I have experienced with various 
-Minecraft UIs.  
+This is a Fabric mod.  Forge is not and will not be supported.
 
-This mod requires `cloth-config`.  It is recommended that you also have `modmenu` installed, but it is not strictly 
+This is a client-side mod that fixes a number of minor inconveniences in various Minecraft UIs.  All features are independently configurable.
+
+### Dependencies
+
+This mod requires [Fabric API] (https://www.curseforge.com/minecraft/mc-mods/fabric-api), 
+[Cloth Config API](https://www.curseforge.com/minecraft/mc-mods/cloth-config) and 
+[HudElements](https://github.com/LaconicLizard/HudElements).  It is recommended that you also have 
+[Mod Menu](https://www.curseforge.com/minecraft/mc-mods/modmenu) installed, but it is not strictly 
 necessary.
 
-The scope of the mod is limited as follows:
+### Using this Mod: Players
 
-1. Unobtrusive; the improvements the mod makes should be fairly intuitive.  It is not necessary to explicate every 
-function of the mod, but most users should be able to figure out how things work without trying.
-1. Improvements; the mod will only improve existing UIs and not create any new ones (except possibly as necessary to 
-configure the mod itself)
-1. User-interface; the mod will only interact with the user-interface.  In particular, inventory automation is highly
-unlikely to ever be implemented, though adjacent improvements may be.
+You can just drop the jar for this mod in your mods folder (make sure to also get the dependencies!) and start playing.  Most features of the mod should be fairly intuitive.  A detailed description is below.  
 
-Currently it has the following functionality:
+Currently this mod has the following functionality:
 
 - `textFieldClear` - clear any text field by right-clicking on it
 - `cycleButtonBack` - for buttons that cycle through options, right click to cycle backwards
@@ -37,12 +38,17 @@ When active, pressing the bound mouse button on a cyclic options button will cyc
 When active, displays the total number of an item in your inventory over the corresponding hotbar slot.  For example, 
 if you have two stacks of bricks in your inventory and are holding one brick in your hotbar, then `129` will be 
 displayed over that hotbar slot.
+- `hotbarCountsScale` (`float` ; default `0.7f`) - scale of the text of `hotbarCounts`
+- `hotbarCountsXOffset`, `hotbarCountsYOffset` (`float` ; default `0`) - offset of the `hotbarCounts` text from 
+its default position
 - `emptySlotCount` (`true` / `false` ; default `true`) - whether or not `emptySlotCount` functionality is active.  
 When active, displays the total number of empty (non-armor) slots in your inventory to the right of the hotbar.  
 Includes your offhand, but not any slots added by mods (as it cannot distinguish whether these slots are restricted 
 like your armor slots are).
+- `emptySlotCountX`, `emptySlotCountY` (`int` ; default `333`, `232`) - position of the `emptySlotCount` 
+element on the HUD
 
-### For Modders
+### Using this Mod: Modders
 
 To ensure your text fields interact correctly with this mod, simply use or extend `TextFieldWidget` 
 (you were probably doing this anyways).  
@@ -62,7 +68,8 @@ ButtonWidget buttonWiget = new ReversibleCyclicButton(..., (widget) -> {
     this.value = (this.value - 1) % this.size;  // this moves value "backwards"
 });
 ```
-In the event that you are already using a non-`ButtonWidget` superclass, you may implement `ReversibleCyclicButtonI` to get the same functionality on your custom subclass:
+In the event that you are already using a non-`ButtonWidget` superclass, you may implement `ReversibleCyclicButtonI` 
+to get the same functionality on your custom subclass:
 ```
 public class MyButtonWidget extends MyOtherButtonWidget implements ReversibleCyclicButtonI {
     ...
@@ -71,3 +78,16 @@ public class MyButtonWidget extends MyOtherButtonWidget implements ReversibleCyc
     }
 }
 ``` 
+If you have a button that cycles through only two options, you can extend 
+`BooleanReversibleCyclicButton` for convenience.
+
+### Scope of This Mod
+
+The scope of the mod is limited as follows:
+
+1. Unobtrusive; the improvements the mod makes should be fairly intuitive.  It is not necessary to explicate every 
+function of the mod, but most users should be able to figure out how things work without trying.
+1. Improvements; the mod will only improve existing UIs and not create any new ones (except possibly as necessary to 
+configure the mod itself)
+1. User-interface; the mod will only interact with the user-interface.  In particular, inventory automation is highly
+unlikely to ever be implemented, though adjacent improvements may be.

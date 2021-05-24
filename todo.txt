@@ -1,7 +1,6 @@
 
 
 Fixes / unfinished:
-- clean up readme
 
 Improvements / refinements:
 
