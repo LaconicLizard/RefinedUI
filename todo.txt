@@ -2,11 +2,10 @@
 
 Fixes / unfinished:
 - fix license
-- transition to using HudElements for hotbarCounts
 - clean up readme
 - fix commit authorship
 - add boolean button api
-- fix up config access patterns to use events
+- finish lang stuff
 
 Improvements / refinements:
 

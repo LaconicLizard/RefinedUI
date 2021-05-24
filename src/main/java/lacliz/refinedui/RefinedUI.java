@@ -3,6 +3,7 @@ package lacliz.refinedui;
 import lacliz.refinedui.internal.EmptySlotsHudElement;
 import lacliz.refinedui.internal.RUIConfig;
 import lacliz.refinedui.internal.RUIKeybinds;
+import laconiclizard.hudelements.api.HudElement;
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.ConfigHolder;
 import me.shedaniel.autoconfig.serializer.GsonConfigSerializer;
@@ -23,11 +24,13 @@ public class RefinedUI implements ModInitializer {
         AutoConfig.register(RUIConfig.class, GsonConfigSerializer::new);
         ConfigHolder<RUIConfig> ch = AutoConfig.getConfigHolder(RUIConfig.class);
         ch.registerLoadListener((holder, config) -> {
+            HudElement he = EmptySlotsHudElement.INSTANCE;
             if (config.emptySlotCount) {
-                EmptySlotsHudElement.INSTANCE.enable();
+                he.enable();
             } else {
-                EmptySlotsHudElement.INSTANCE.disable();
+                he.disable();
             }
+            he.setPos(config.emptySlotCountX, config.emptySlotCountY);
             return ActionResult.SUCCESS;
         });
         ch.load();
