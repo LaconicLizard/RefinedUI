@@ -2,7 +2,6 @@
 
 Fixes / unfinished:
 - clean up readme
-- finish lang stuff
 
 Improvements / refinements:
 

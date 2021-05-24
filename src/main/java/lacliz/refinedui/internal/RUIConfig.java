@@ -2,6 +2,7 @@ package lacliz.refinedui.internal;
 
 import me.shedaniel.autoconfig.ConfigData;
 import me.shedaniel.autoconfig.annotation.Config;
+import me.shedaniel.autoconfig.annotation.ConfigEntry;
 
 import static lacliz.refinedui.RefinedUI.MOD_ID;
 
@@ -12,11 +13,10 @@ public class RUIConfig implements ConfigData {
     public boolean cycleButtonBack = true;
     public boolean hotbarCounts = true;
     public float hotbarCountsScale = 0.7f;
-    public int hotbarCountsXOffset = 0,
-            hotbarCountsYOffset = 0;
+    public int hotbarCountsXOffset = 0, hotbarCountsYOffset = 0;
 
     public boolean emptySlotCount = true;
-    public int emptySlotCountX = 333,
-            emptySlotCountY = 232;
+    @ConfigEntry.Gui.Excluded
+    public int emptySlotCountX = 333, emptySlotCountY = 232;
 
 }

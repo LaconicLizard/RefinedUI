@@ -1,6 +1,13 @@
 {
   "text.autoconfig.refinedui.title": "RefinedUI Config",
-  "text.autoconfig.refinedui.option.textFieldClear": "Erase text fields with alt-click",
-  "text.autoconfig.refinedui.option.cycleButtonBack": "Move cyclic buttons backwards with alt-click",
-  "text.autoconfig.refinedui.option.hotbarCounts": "Display total item quantities over hotbar"
+  "text.autoconfig.refinedui.option.textFieldClear": "Erase text fields with secondary-click",
+  "text.autoconfig.refinedui.option.cycleButtonBack": "Move cyclic buttons back with secondary-click",
+  "text.autoconfig.refinedui.option.hotbarCounts": "Display total item quantities over hotbar",
+  "text.autoconfig.refinedui.option.hotbarCountsScale": "Scale of hotbarCounts text",
+  "text.autoconfig.refinedui.option.hotbarCountsXOffset": "x-offset of hotbarCounts text",
+  "text.autoconfig.refinedui.option.hotbarCountsYOffset": "y-offset of hotbarCounts text",
+  "text.autoconfig.refinedui.option.emptySlotCount": "Display number of empty inventory slots in HUD",
+  "key.refinedui.textFieldClearButton": "Clear text field (mouse)",
+  "key.refinedui.cycleButtonBackButton": "Move cyclic button back (mouse)",
+  "category.refinedui.keys": "RefinedUI"
 }
