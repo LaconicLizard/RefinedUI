@@ -1,6 +1,7 @@
 package lacliz.refinedui.mixin;
 
 import lacliz.refinedui.Util;
+import lacliz.refinedui.api.RefinedUI_API;
 import me.shedaniel.clothconfig2.gui.entries.BooleanListEntry;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.text.Text;
@@ -25,7 +26,7 @@ public class ClothConfig_BooleanListEntry_Mixin {
     public void post_init(Text fieldName, boolean bool, Text resetButtonKey, Supplier<Boolean> defaultValue,
                           Consumer<Boolean> saveConsumer, Supplier<Optional<Text[]>> tooltipSupplier,
                           boolean requiresRestart, CallbackInfo ci) {
-        Util.SOME_BOOLEAN_BUTTONS.add(this.buttonWidget);
+        RefinedUI_API.registerReversibleButton(buttonWidget, ButtonWidget::onPress);
     }
 
 }

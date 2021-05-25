@@ -1,19 +1,15 @@
 package lacliz.refinedui;
 
-import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Util {
-
-    // weak set of ButtonWidgets that are really boolean buttons
-    public static final Set<ButtonWidget> SOME_BOOLEAN_BUTTONS = Collections.synchronizedSet(
-            Collections.newSetFromMap(new WeakHashMap<>()));
 
     /** Scales the given matrix stack about the given point. */
     public static void scaleAbout(MatrixStack stack, double x, double y, double z, float xscale, float yscale, float zscale) {

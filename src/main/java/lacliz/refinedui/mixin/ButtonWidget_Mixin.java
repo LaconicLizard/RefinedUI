@@ -1,10 +1,9 @@
 package lacliz.refinedui.mixin;
 
+import lacliz.refinedui.RefinedUI;
 import lacliz.refinedui.internal.RUIKeybinds;
 import lacliz.refinedui.Util;
 import lacliz.refinedui.accessors.Difficulty_Accessor;
-import lacliz.refinedui.api.ReversibleCyclicButton;
-import lacliz.refinedui.api.ReversibleCyclicButtonI;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.world.CreateWorldScreen;
@@ -18,6 +17,7 @@ import org.spongepowered.asm.mixin.Shadow;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Consumer;
 
 import static lacliz.refinedui.RefinedUI.LOGGER;
 import static lacliz.refinedui.RefinedUI.getConfig;
@@ -41,24 +41,13 @@ public abstract class ButtonWidget_Mixin extends AbstractButtonWidget {
             if (this.isValidClickButton(button)) {  // normal functionality (normal click)
                 return super.mouseClicked(mouseX, mouseY, button);
             } else if (getConfig().cycleButtonBack && RUIKeybinds.cycleButtonBack_keyBinding.matchesMouse(button)) {
-                //noinspection ConstantConditions
-                if ((Object) this instanceof ReversibleCyclicButton) {  // for api
-                    LOGGER.info("backcycling ReversibleCyclicButton");
-                    playSound();
-                    ((ReversibleCyclicButton) (Object) this).cycleBackwards.onPress((ButtonWidget) (Object) this);
-                    return true;
-                }
-                if (this instanceof ReversibleCyclicButtonI) {  // also for api
-                    LOGGER.info("backcycling ReversibleCyclicButtonI");
-                    playSound();
-                    ((ReversibleCyclicButtonI) this).cycleBackwards();
-                    return true;
-                }
+                // api support
                 //noinspection SuspiciousMethodCalls
-                if (Util.SOME_BOOLEAN_BUTTONS.contains(this)) {
-                    LOGGER.info("backcycling SOME_BOOLEAN_BUTTONS elt");
+                Consumer<ButtonWidget> c = RefinedUI.API_BUTTONS.get(this);
+                if (c != null) {
+                    LOGGER.info("backcycling API button");
                     playSound();
-                    onClick(mouseX, mouseY);
+                    c.accept((ButtonWidget) (Object) this);
                     return true;
                 }
                 Screen cs = MinecraftClient.getInstance().currentScreen;

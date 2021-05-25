@@ -53,33 +53,34 @@ element on the HUD
 To ensure your text fields interact correctly with this mod, simply use or extend `TextFieldWidget` 
 (you were probably doing this anyways).  
 
-To ensure that your buttons interact correctly with this mod, you should use `ReversibleCyclicButton` on all buttons 
-that cycle through multiple options.  For example:
+To ensure that your buttons interact correctly with this mod, you should register all buttons 
+that cycle through multiple options with the following code:
 ```
-// old code:
-ButtonWidget buttonWidget = new ButtonWidget(..., (widget) -> {
-    this.value = (this.value + 1) % this.size;  // this moves value "forward"
+RefinedUI_API.registerReversibleButton(myButton, (button) -> {
+    // code that reverses myButton
 });
+```
 
-// new code:
-ButtonWidget buttonWiget = new ReversibleCyclicButton(..., (widget) -> {
-    this.value = (this.value + 1) % this.size;
-}, (widget) -> {
-    this.value = (this.value - 1) % this.size;  // this moves value "backwards"
+For example, if `myButton` cycles through integer values from 0 to 8, you might have the following:
+```
+RefinedUI_API.registerReversibleButton(myButton, (button) -> {
+    button.value = (button.value - 1) % 8;
 });
 ```
-In the event that you are already using a non-`ButtonWidget` superclass, you may implement `ReversibleCyclicButtonI` 
-to get the same functionality on your custom subclass:
+
+Building against this mod is easy; just add the following to your `build.gradle`:
 ```
-public class MyButtonWidget extends MyOtherButtonWidget implements ReversibleCyclicButtonI {
-    ...
-    void cycleBackwards() {
-        ...  // cycle this button backwards by one
-    }
+repositories {
+    ... other repositories, if any
+    maven { url 'https://jitpack.io' }
 }
-``` 
-If you have a button that cycles through only two options, you can extend 
-`BooleanReversibleCyclicButton` for convenience.
+
+dependencies {
+    ... other dependencies
+    modImplementation "com.github.LaconicLizard:RefinedUI:<version>"
+}
+```
+See the [jitpack website](https://jitpack.io/) for more information on how this works.
 
 ### Scope of This Mod
 
