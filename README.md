@@ -66,9 +66,11 @@ RefinedUI_API.registerReversibleButton(myButton, (button) -> {
 For example, if `myButton` cycles through integer values from 0 to 8, you might have the following:
 ```
 RefinedUI_API.registerReversibleButton(myButton, (button) -> {
-    button.value = (button.value - 1) % 8;
+    button.value = (button.value - 1 + 8) % 8;
 });
 ```
+
+Make sure to only invoke `registerReversibleButton` if `RefinedUI` is installed!  You can detect this at initialization with `FabricLoader.getInstance().isModLoaded("refinedui")`.
 
 Building against this mod is easy; just add the following to your `build.gradle`:
 ```
@@ -79,7 +81,7 @@ repositories {
 
 dependencies {
     ... other dependencies
-    modImplementation "com.github.LaconicLizard:RefinedUI:<version>"
+    modCompileOnly "com.github.LaconicLizard:RefinedUI:<version>"
 }
 ```
 See the [jitpack website](https://jitpack.io/) for more information on how this works.

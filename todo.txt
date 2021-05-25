@@ -1,7 +1,6 @@
 
 
 Fixes / unfinished:
-- test api usage, even when refinedui not present as mod
 
 Improvements / refinements:
 
