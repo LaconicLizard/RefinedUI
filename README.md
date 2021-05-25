@@ -4,6 +4,8 @@ _Miscellaneous unobtrusive user-interface improvements for Minecraft._
 
 This is a Fabric mod.  Forge is not and will not be supported.
 
+THIS MOD IS NOT YET READY FOR PUBLIC USE.  DO NOT USE THIS MOD UNTIL THIS MESSAGE HAS BEEN REMOVED.
+
 This is a client-side mod that fixes a number of minor inconveniences in various Minecraft UIs.  All features are independently configurable.
 
 ### Dependencies
