@@ -8,7 +8,7 @@ This is a client-side mod that fixes a number of minor inconveniences in various
 
 ### Dependencies
 
-This mod requires [Fabric API] (https://www.curseforge.com/minecraft/mc-mods/fabric-api), 
+This mod requires [Fabric API](https://www.curseforge.com/minecraft/mc-mods/fabric-api), 
 [Cloth Config API](https://www.curseforge.com/minecraft/mc-mods/cloth-config) and 
 [HudElements](https://github.com/LaconicLizard/HudElements).  It is recommended that you also have 
 [Mod Menu](https://www.curseforge.com/minecraft/mc-mods/modmenu) installed, but it is not strictly 
