@@ -4,8 +4,6 @@ _Miscellaneous unobtrusive user-interface improvements for Minecraft._
 
 This is a Fabric mod.  Forge is not and will not be supported.
 
-THIS MOD IS NOT YET READY FOR PUBLIC USE.  DO NOT USE THIS MOD UNTIL THIS MESSAGE HAS BEEN REMOVED.
-
 This is a client-side mod that fixes a number of minor inconveniences in various Minecraft UIs.  All features are independently configurable.
 
 ### Dependencies
@@ -25,7 +23,7 @@ Currently this mod has the following functionality:
 - `textFieldClear` - clear any text field by right-clicking on it
 - `cycleButtonBack` - for buttons that cycle through options, right click to cycle backwards
 - `hotbarCounts` - displays total number of an item in your inventory over the corresponding hotbar slot
-- 'emptySlotCount' - displays the total number of empty slots in inventory to right of hotbar
+- `emptySlotCount` - displays the total number of empty slots in inventory to right of hotbar
 
 Every piece of functionality listed above can be enabled or disabled via the configuration file.  Additional options 
 may also be present there once further functionality has been added.
