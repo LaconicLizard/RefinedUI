@@ -28,7 +28,7 @@
     "refinedui.mixins.json"
   ],
   "depends": {
-    "hudelements": ">=1.0.2",
+    "hudelements": ">=1.0.4",
     "cloth-config2": ">=4.11.26",
     "fabricloader": ">=0.11.3",
     "fabric": "*",
