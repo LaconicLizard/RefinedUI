@@ -1,7 +1,7 @@
-package lacliz.refinedui.internal;
+package laconiclizard.refinedui.internal;
 
-import lacliz.refinedui.RefinedUI;
-import lacliz.refinedui.Util;
+import laconiclizard.refinedui.RefinedUI;
+import laconiclizard.refinedui.Util;
 import laconiclizard.hudelements.api.HudElement;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;

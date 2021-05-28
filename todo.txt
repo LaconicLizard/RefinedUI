@@ -6,9 +6,6 @@ Improvements / refinements:
 
 Features (under consideration, maybe maybe not gonna be implemented):
 - display exact durability of tools on-screen when they are held
-- keybind to use item in off hand even if main hand has an action
-    - likely implemented as swap-and-use-and-swap-back
-    - conflict between block-picking and use-offhand; which button to default to? 3?
 - "inverse health bar" on entity models; a small red bar (visible from all angles; possibly multiple bars) that
     increase in size as the entity gets damaged.  Bar should "fill" its space when the entity dies; this is to
     unobtrusively indicate entity health.  (out of theme?)

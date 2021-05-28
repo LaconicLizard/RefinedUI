@@ -1,4 +1,4 @@
-package lacliz.refinedui.client;
+package laconiclizard.refinedui.client;
 
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;

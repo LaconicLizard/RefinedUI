@@ -1,7 +1,7 @@
-package lacliz.refinedui.mixin;
+package laconiclizard.refinedui.mixin;
 
 import com.mojang.blaze3d.platform.GlStateManager;
-import lacliz.refinedui.internal.RUIKeybinds;
+import laconiclizard.refinedui.internal.RUIKeybinds;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.gui.widget.OptionButtonWidget;
@@ -12,8 +12,8 @@ import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 
-import static lacliz.refinedui.RefinedUI.LOGGER;
-import static lacliz.refinedui.RefinedUI.getConfig;
+import static laconiclizard.refinedui.RefinedUI.LOGGER;
+import static laconiclizard.refinedui.RefinedUI.getConfig;
 
 @Mixin(OptionButtonWidget.class)
 public abstract class OptionButtonWidget_Mixin extends ButtonWidget implements OrderableTooltip {

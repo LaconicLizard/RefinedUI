@@ -1,7 +1,6 @@
-package lacliz.refinedui.mixin;
+package laconiclizard.refinedui.mixin;
 
-import lacliz.refinedui.Util;
-import lacliz.refinedui.api.RefinedUI_API;
+import laconiclizard.refinedui.api.RefinedUI_API;
 import me.shedaniel.clothconfig2.gui.entries.BooleanListEntry;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.text.Text;

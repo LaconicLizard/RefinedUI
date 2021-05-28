@@ -15,13 +15,13 @@
   "environment": "client",
   "entrypoints": {
     "modmenu": [
-      "lacliz.refinedui.internal.RUIModMenuEP"
+      "laconiclizard.refinedui.internal.RUIModMenuEP"
     ],
     "client": [
-      "lacliz.refinedui.client.RefinedUIClient"
+      "laconiclizard.refinedui.client.RefinedUIClient"
     ],
     "main": [
-      "lacliz.refinedui.RefinedUI"
+      "laconiclizard.refinedui.RefinedUI"
     ]
   },
   "mixins": [

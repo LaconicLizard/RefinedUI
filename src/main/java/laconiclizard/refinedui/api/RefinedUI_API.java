@@ -1,6 +1,6 @@
-package lacliz.refinedui.api;
+package laconiclizard.refinedui.api;
 
-import lacliz.refinedui.RefinedUI;
+import laconiclizard.refinedui.RefinedUI;
 import net.minecraft.client.gui.widget.ButtonWidget;
 
 import java.util.function.Consumer;

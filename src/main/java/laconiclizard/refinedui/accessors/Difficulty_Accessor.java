@@ -1,4 +1,4 @@
-package lacliz.refinedui.accessors;
+package laconiclizard.refinedui.accessors;
 
 import net.minecraft.world.Difficulty;
 

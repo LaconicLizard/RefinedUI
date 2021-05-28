@@ -1,4 +1,4 @@
-package lacliz.refinedui.internal;
+package laconiclizard.refinedui.internal;
 
 import com.terraformersmc.modmenu.api.ConfigScreenFactory;
 import com.terraformersmc.modmenu.api.ModMenuApi;

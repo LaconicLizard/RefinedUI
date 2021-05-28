@@ -1,4 +1,4 @@
-package lacliz.refinedui.mixin;
+package laconiclizard.refinedui.mixin;
 
 import net.minecraft.client.gui.screen.world.CreateWorldScreen;
 import net.minecraft.client.gui.widget.ButtonWidget;

@@ -1,6 +1,7 @@
-package lacliz.refinedui.mixin;
+package laconiclizard.refinedui.mixin;
 
-import lacliz.refinedui.internal.RUIKeybinds;
+import laconiclizard.refinedui.internal.RUIKeybinds;
+import laconiclizard.refinedui.RefinedUI;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.widget.AbstractButtonWidget;
 import net.minecraft.client.gui.widget.TextFieldWidget;
@@ -9,9 +10,6 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-
-import static lacliz.refinedui.RefinedUI.LOGGER;
-import static lacliz.refinedui.RefinedUI.getConfig;
 
 @Mixin(TextFieldWidget.class)
 public abstract class TextFieldWidget_Mixin extends AbstractButtonWidget {
@@ -29,14 +27,14 @@ public abstract class TextFieldWidget_Mixin extends AbstractButtonWidget {
     public void mouseClicked(double mouseX, double mouseY, int button, CallbackInfoReturnable<Boolean> cir) {
         // when clicking a text field with the appropriate button, clear its contents
         // requires that this TextFieldWidget be focused (to prevent accidentally clearing stuff)
-        if (this.active && getConfig().textFieldClear  // controlled via config
+        if (this.active && RefinedUI.getConfig().textFieldClear  // controlled via config
                 && isVisible()  // check visible
                 // check we clicked on this
                 && mouseX >= (double) this.x && mouseX < (double) (this.x + this.width)
                 && mouseY >= (double) this.y && mouseY < (double) (this.y + this.height)
                 && isFocused()  // check that we're focused
                 && RUIKeybinds.textFieldClear_keyBinding.matchesMouse(button)) {  // check that it's the correct button
-            LOGGER.info("clearing TextFieldWidget");
+            RefinedUI.LOGGER.info("clearing TextFieldWidget");
             this.playDownSound(MinecraftClient.getInstance().getSoundManager());
             this.setText("");
         }

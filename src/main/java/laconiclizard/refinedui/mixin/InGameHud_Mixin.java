@@ -1,8 +1,8 @@
-package lacliz.refinedui.mixin;
+package laconiclizard.refinedui.mixin;
 
-import lacliz.refinedui.RefinedUI;
-import lacliz.refinedui.Util;
-import lacliz.refinedui.internal.RUIConfig;
+import laconiclizard.refinedui.RefinedUI;
+import laconiclizard.refinedui.Util;
+import laconiclizard.refinedui.internal.RUIConfig;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.hud.InGameHud;

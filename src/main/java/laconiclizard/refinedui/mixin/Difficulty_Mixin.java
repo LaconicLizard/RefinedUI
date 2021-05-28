@@ -1,6 +1,6 @@
-package lacliz.refinedui.mixin;
+package laconiclizard.refinedui.mixin;
 
-import lacliz.refinedui.accessors.Difficulty_Accessor;
+import laconiclizard.refinedui.accessors.Difficulty_Accessor;
 import net.minecraft.world.Difficulty;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;

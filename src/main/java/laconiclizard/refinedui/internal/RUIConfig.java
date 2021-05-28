@@ -1,12 +1,11 @@
-package lacliz.refinedui.internal;
+package laconiclizard.refinedui.internal;
 
+import laconiclizard.refinedui.RefinedUI;
 import me.shedaniel.autoconfig.ConfigData;
 import me.shedaniel.autoconfig.annotation.Config;
 import me.shedaniel.autoconfig.annotation.ConfigEntry;
 
-import static lacliz.refinedui.RefinedUI.MOD_ID;
-
-@Config(name = MOD_ID)
+@Config(name = RefinedUI.MOD_ID)
 public class RUIConfig implements ConfigData {
 
     public boolean textFieldClear = true;

@@ -1,8 +1,8 @@
-package lacliz.refinedui;
+package laconiclizard.refinedui;
 
-import lacliz.refinedui.internal.EmptySlotsHudElement;
-import lacliz.refinedui.internal.RUIConfig;
-import lacliz.refinedui.internal.RUIKeybinds;
+import laconiclizard.refinedui.internal.EmptySlotsHudElement;
+import laconiclizard.refinedui.internal.RUIConfig;
+import laconiclizard.refinedui.internal.RUIKeybinds;
 import laconiclizard.hudelements.api.HudElement;
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.ConfigHolder;

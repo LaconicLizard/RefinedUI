@@ -1,4 +1,4 @@
-package lacliz.refinedui.mixin;
+package laconiclizard.refinedui.mixin;
 
 import net.minecraft.client.world.GeneratorType;
 import org.spongepowered.asm.mixin.Mixin;
