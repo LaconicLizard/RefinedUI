@@ -14,6 +14,7 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.math.Vec3i;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -21,7 +22,9 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Mixin(InGameHud.class)
@@ -40,36 +43,13 @@ public class InGameHud_Mixin {
     //  Lastly, iterating the player's inventory once per frame is rather low overhead anyways, even if it leaves
     //      a bad taste in my mouth.
     private Map<Item, Integer> refinedui_invCountsCache = new HashMap<>();
+    private final List<Vec3i> refinedui_hotbarItemCoords = new ArrayList<>();
 
     @Inject(method = "renderHotbarItem(IIFLnet/minecraft/entity/player/PlayerEntity;Lnet/minecraft/item/ItemStack;)V",
             at = @At("RETURN"))
     public void post_renderHotbarItem(int x, int y, float tickDelta, PlayerEntity player, ItemStack stack, CallbackInfo ci) {
-        RUIConfig config = RefinedUI.getConfig();
-        if (config.hotbarCounts && !stack.isEmpty()) {
-            // adapted from ItemRenderer.renderGuiItemOverlay
-            ItemRenderer ir = this.itemRenderer;
-            TextRenderer tr = this.client.textRenderer;
-
-            int ct = refinedui_invCountsCache.get(stack.getItem());
-            // vanilla stacks go to 64, giving a max inventory contents of 2368, excluding armor and crafting window
-            //  thats 4 digits, which we scale the display for
-            // si abbreviation can be used after that, if a modded item makes it possible to have 10k+ items in player's
-            //  inv at a time
-            String countLabel = String.valueOf(ct);
-            if (countLabel.length() > 4) countLabel = "9999";
-            int w = tr.getWidth(countLabel);
-            float rx = x + 19 - 2 - w + config.hotbarCountsXOffset,  // coordinates where label will be drawn
-                    ry = y + 6 + 3 - 16 + config.hotbarCountsYOffset;
-            float scale = config.hotbarCountsScale;
-
-            MatrixStack matrixStack = new MatrixStack();
-            matrixStack.translate(0.0D, 0.0D, ir.zOffset + 200.0F);
-            // scale down to keep large numbers from overlapping
-            Util.scaleAbout(matrixStack, rx + w, ry, 0d, scale, scale, 1f);
-            VertexConsumerProvider.Immediate immediate = VertexConsumerProvider.immediate(Tessellator.getInstance().getBuffer());
-            tr.draw(countLabel, rx, ry, COLOR, true,
-                    matrixStack.peek().getModel(), immediate, false, 0, LIGHT);
-            immediate.draw();
+        if (!stack.isEmpty()) {
+            refinedui_hotbarItemCoords.add(new Vec3i(x, y, refinedui_invCountsCache.get(stack.getItem())));
         }
     }
 
@@ -80,6 +60,42 @@ public class InGameHud_Mixin {
         if (cpe == null) return;
         // cache inventory counts
         refinedui_invCountsCache = Util.itemCounts(cpe.inventory);
+    }
+
+    @Inject(method = "render(Lnet/minecraft/client/util/math/MatrixStack;F)V",
+            at = @At("RETURN"))
+    public void post_render(MatrixStack matrices, float tickDelta, CallbackInfo ci) {
+        int x, y, count;
+        for (Vec3i v : refinedui_hotbarItemCoords) {
+            x = v.getX();
+            y = v.getY();
+            count = v.getZ();
+            RUIConfig config = RefinedUI.getConfig();
+            if (config.hotbarCounts && count != 0) {
+                // adapted from ItemRenderer.renderGuiItemOverlay
+                ItemRenderer ir = this.itemRenderer;
+                TextRenderer tr = this.client.textRenderer;
+
+                // vanilla stacks go to 64, giving a max inventory contents of 2368, excluding armor and crafting window
+                //  thats 4 digits, which we scale the display for
+                String countLabel = String.valueOf(count);
+                if (countLabel.length() > 4) countLabel = "9999";
+                int w = tr.getWidth(countLabel);
+                float rx = x + 19 - 2 - w + config.hotbarCountsXOffset,  // coordinates where label will be drawn
+                        ry = y + 6 + 3 - 16 + config.hotbarCountsYOffset;
+                float scale = config.hotbarCountsScale;
+
+                MatrixStack matrixStack = new MatrixStack();
+                matrixStack.translate(0.0D, 0.0D, ir.zOffset + 200.0F);
+                // scale down to keep large numbers from overlapping
+                Util.scaleAbout(matrixStack, rx + w, ry, 0d, scale, scale, 1f);
+                VertexConsumerProvider.Immediate immediate = VertexConsumerProvider.immediate(Tessellator.getInstance().getBuffer());
+                tr.draw(countLabel, rx, ry, COLOR, true,
+                        matrixStack.peek().getModel(), immediate, false, 0, LIGHT);
+                immediate.draw();
+            }
+        }
+        refinedui_hotbarItemCoords.clear();
     }
 
 }
